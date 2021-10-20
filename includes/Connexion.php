@@ -1,4 +1,7 @@
 <?php
+namespace Tools;
+
+use \PDO;
 
 class Connexion {
 

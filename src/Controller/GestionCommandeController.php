@@ -9,7 +9,7 @@ class GestionCommandeController {
     
     public function chercheUne($params) {
         //appel de la méthode find($id) de la classe Model adéquate
-        $modele = new GestionCommandeController();
+        $modele = new GestionCommandeModel();
         $id = filter_var(intval($params["id"]), FILTER_VALIDATE_INT);
         $uneCommande = $modele->find($id);
         if ($uneCommande) {
@@ -19,9 +19,9 @@ class GestionCommandeController {
             throw new Exception("Commande " . $id . "inconnue");
         }
     }
-    public function chercheTous() {
+    public function chercheToutes() {
         //appel de la méthode findAll() de la classe Model adequate
-        $modele = new GestionCommandeController();
+        $modele = new GestionCommandeModel();
         $commandes = $modele->findAll();
         if ($commandes) {
             $r = new ReflectionClass($this);

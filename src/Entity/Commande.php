@@ -24,16 +24,16 @@ class Commande {
         return $this->id;
     }
 
-    public function getIdClient() {
-        return $this->idClient;
-    }
-
     public function getDateCde() {
         return $this->dateCde;
     }
 
     public function getNoFacture() {
         return $this->noFacture;
+    }
+    
+    public function getIdClient() {
+        return $this->idClient;
     }
 
     public function setId($id) {

@@ -20,6 +20,6 @@ class GestionCommandeModel {
         $unObjetPDO = Connexion::getConnexion();
         $sql = "select * from COMMANDE";
         $lignes = $unObjetPDO->query($sql);
-        return $lignes->fetchAll(PDO::FETCH_CLASS, Client::class);
+        return $lignes->fetchAll(PDO::FETCH_CLASS, Commande::class);
     }
 }

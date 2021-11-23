@@ -1,17 +1,20 @@
 {%  extends "layout.html.twig" %}
 {% block contenu %}
     <p> <h2> Liste des clients </p></h2>
-    <table>
-        <tr>
-            <th>num</th>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>adresse</th>
-            <th>complement</th>
-            <th>cp</th>
-            <th>ville</th>
-            <th>tel</th>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">num</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">adresse</th>
+                <th scope="col">complement</th>
+                <th scope="col">cp</th>
+                <th scope="col">ville</th>
+                <th scope="col">tel</th>
+                <th scope="col"><th>
+            </tr>
+        </thead>
         {% for unClient in tousClients %}
             <tr>
                 <td>{{ unClient.getId() }}</td>
@@ -26,6 +29,7 @@
                 <td>{{ unClient.getCpCli() }}</td>
                 <td>{{ unClient.getVilleCli() }}</td>
                 <td>{{ unClient.getTelCli() }}</td>
+                <td><a href="/?c=gestionCommande&a=commandesUnClient&id={{ unClient.getId() }}" ><button>voir commandes</button></a>
             </tr>
         {% endfor %}
     </table>

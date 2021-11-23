@@ -2,8 +2,12 @@
 namespace APP\Controller;
 
 use APP\Model\GestionCommandeModel;
+use APP\Model\GestionClientModel;
+use APP\Repository\CommandeRepository;
 use ReflectionClass;
 use \Exception;
+use Tools\MyTwig;
+use Tools\Repository;
 
 class GestionCommandeController {
     
@@ -20,14 +24,28 @@ class GestionCommandeController {
         }
     }
     public function chercheToutes() {
-        //appel de la méthode findAll() de la classe Model adequate
-        $modele = new GestionCommandeModel();
-        $commandes = $modele->findAll();
+        //instanciation du repository
+        $repository = Repository::getRepository("APP\Entity\Client");
+        $commandes = $repository->findAll();
         if ($commandes) {
             $r = new ReflectionClass($this);
             include_once PATH_VIEW . str_replace('Controller', 'View', $r->getShortName()) . "/plusieursCommandes.php";
         } else {
             throw new Exception("Aucune Commande à afficher");
         }
+    }
+    
+    public function commandesUnClient($idClient) {
+        $modele = new GestionCommandeModel();
+        $modeleClient = new GestionClientModel();
+        $commandes = $modele->findCommandesClient($idClient['id']);
+        $client = $modeleClient->find($idClient['id']);
+        $r = new ReflectionClass($this);
+        $vue = str_replace('Controller', 'View', $r->getShortName()) . "/commandesClient.html.twig";
+        $params = array(
+            'commandes' => $commandes,
+            'client' => $client
+        );
+        MyTwig::afficheVue($vue, $params);
     }
 }

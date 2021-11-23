@@ -6,20 +6,21 @@ use APP\Entity\Client;
 use Tools\MyTwig;
 use ReflectionClass;
 use \Exception;
+use Tools\Repository;
 
 class GestionClientController {
     
     public function chercheUn($params) {
         //appel de la méthode find($id) de la classe Model adequate
-        $modele = new GestionClientModel();
+        $repository = Repository::getRepository("APP\Entity\Client");
         // dans tous les cas on récupère les Ids des clients
-        $ids = $modele->findIds();
+        $ids = $repository->findIds();
         // on place ces Ids dans le tableau de paramètres que l'on va envoyer à la vue
         $params['lesId']=$ids;
         // on teste si l'id du client à chercher a été passé dans l'URL
         if (array_key_exists('id', $params)) {
             $id = filter_var(intval($params["id"]), FILTER_VALIDATE_INT);
-            $unClient = $modele->find($id);
+            $unClient = $repository->find($id);
             // on place le client trouvé dans le tableau de paramètres que l'on va envoyer à la vue
             $params['unClient']=$unClient;
         }
@@ -32,9 +33,9 @@ class GestionClientController {
     }
     
     public function chercheTous() {
-        //appel de la méthode findAll() de la classe Model adequate
-        $modele = new GestionClientModel();
-        $clients = $modele->findAll();
+        //instanciation du repository
+        $repository = Repository::getRepository("APP\Entity\Client");
+        $clients = $repository->findAll();
         if ($clients) {
             $r = new ReflectionClass($this);
             $vue = str_replace('Controller', 'View', $r->getShortName()) . "/tousClients.html.twig";

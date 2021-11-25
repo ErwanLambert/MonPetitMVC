@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <p> <h2>Statistiques des clients</p></h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">ville</th>
+                <th scope="col">Nombres de commandes</th>
+            </tr>
+        </thead>
+        {% for unClient in statsClients %}
+            <tr>
+                <td>{{ unClient.id }}</td>
+                <td>{{ unClient.nomCli }}</td>
+                <td>{{ unClient.prenomCli }}</td>
+                <td>{{ unClient.villeCli }}</td>
+                <td>{{ unClient.nbCommande }}<td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+    Fin de l'affichage
+{% endblock %}
+

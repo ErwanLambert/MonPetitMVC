@@ -1,0 +1,36 @@
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">num</th>
+            <th scope="col">titre</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">adresse</th>
+            <th scope="col">complement</th>
+            <th scope="col">cp</th>
+            <th scope="col">ville</th>
+            <th scope="col">tel</th>
+            <th scope="col"><th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for unClient in tousClients %}
+            <tr>
+                <td>{{ unClient.getId() }}</td>
+                <td>{{ unClient.getTitreCli() }}</td>
+                <td>{{ unClient.getNomCli() }}</td>
+                <td>{{ unClient.getPrenomCli() }}</td>
+                <td>{{ unClient.getAdresseRue1Cli() }}</td>
+                {%  if unClient.getAdresseRue2Cli() %}
+                    <td>{{ unClient.getAdresseRue2Cli() }}</td>
+                {% else %}
+                    <td>###</td>
+                {% endif %}
+                <td>{{ unClient.getCpCli() }}</td>
+                <td>{{ unClient.getVilleCli() }}</td>
+                <td>{{ unClient.getTelCli() }}</td>
+                <td><a href="/?c=gestionCommande&a=commandesUnClient&id={{ unClient.getId() }}" ><button>voir commandes</button></a>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    {% if uneCommande %}
+        {% block affiche %}
+            <p><h2> Informations de la commande numéro {{ uneCommande.getId() }}</h2></p>
+        <p>Date de la commande : {{ uneCommande.getDateCde() }}</p>
+        <p>Numéro de facture : {{ uneCommande.getNoFacture() }}</p>
+        <p>Identifiant du client : {{ uneCommande.getIdClient() }}</p>
+        {% endblock %}
+    {% else %}
+        <p>Cette commande n'existe pas.</p>
+    {% endif %}
+{% endblock %}
